@@ -2,17 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\Playlist;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class PlaylistSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call([PlaylistSeeder::class, CategorySeeder::class]);
+        Playlist::factory(20)->create();
     }
 }
