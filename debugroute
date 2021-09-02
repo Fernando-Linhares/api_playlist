@@ -1,0 +1,13 @@
++--------+-----------+------------------------------+------------------+------------------------------------------------------------+------------+
+| Domain | Method    | URI                          | Name             | Action                                                     | Middleware |
++--------+-----------+------------------------------+------------------+------------------------------------------------------------+------------+
+|        | GET|HEAD  | /                            | test             | Closure                                                    | web        |
+|        | GET|HEAD  | api/playlist                 | playlist.index   | App\Http\Controllers\PlaylistController@index              | api        |
+|        | POST      | api/playlist                 | playlist.store   | App\Http\Controllers\PlaylistController@store              | api        |
+|        | GET|HEAD  | api/playlist/create          | playlist.create  | App\Http\Controllers\PlaylistController@create             | api        |
+|        | GET|HEAD  | api/playlist/{playlist}      | playlist.show    | App\Http\Controllers\PlaylistController@show               | api        |
+|        | PUT|PATCH | api/playlist/{playlist}      | playlist.update  | App\Http\Controllers\PlaylistController@update             | api        |
+|        | DELETE    | api/playlist/{playlist}      | playlist.destroy | App\Http\Controllers\PlaylistController@destroy            | api        |
+|        | GET|HEAD  | api/playlist/{playlist}/edit | playlist.edit    | App\Http\Controllers\PlaylistController@edit               | api        |
+|        | GET|HEAD  | sanctum/csrf-cookie          |                  | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show | web        |
++--------+-----------+------------------------------+------------------+------------------------------------------------------------+------------+

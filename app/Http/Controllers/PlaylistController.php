@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Playlist;
+use Exception;
 use Illuminate\Http\Request;
 
 class PlaylistController extends Controller
@@ -29,24 +29,18 @@ class PlaylistController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        if($this->playlist->create($request->all()))
+            return response()->json(['massage'=>'created item succesfully'],201);
+
+        return response()->json(['massage'=>'error on create item'],418);
     }
 
     /**
@@ -61,25 +55,21 @@ class PlaylistController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Playlist  $playlist
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Playlist $playlist)
-    {
-        
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Playlist  $playlist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Playlist $playlist)
+    public function update(Playlist $playlist, Request $request)
     {
+        $playlist->title = $request->title;
+        $playlist->favorite = $request->favorite;
+        $playlist->category_id = $request->category;
+        if($playlist->save())
+            return response()->json(['message'=>'edited item successfully'],200);
+
+        return response()->json(['message'=>'error on edit item'],418);
     }
 
     /**
@@ -90,6 +80,9 @@ class PlaylistController extends Controller
      */
     public function destroy(Playlist $playlist)
     {
-        //
+        if($playlist->delete())
+            return response()->json(['message'=>'item deleted successfully'],200);
+    
+        return response()->json(['message'=>'error on delete item'],418);
     }
 }
